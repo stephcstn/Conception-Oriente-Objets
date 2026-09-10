@@ -1,20 +1,5 @@
 #include <iostream>
-#include "liste_item.cpp"
-
-class liste
-{
-
-private:
-    liste_item *items;
-    int count;
-
-public:
-    liste();
-    void add(int n, int index, liste_item *items);
-    int size();
-    void clear();
-    int get(int index, liste_item *items);
-};
+#include "liste.hpp"
 
 liste::liste()
 {
@@ -22,26 +7,43 @@ liste::liste()
     count = 0;
 }
 
-void liste::add(int n, int index, liste_item *items)
+void liste::add(int n)
 {
-    items->setSuiv(items->getSuiv());
-    items[index] = *items;
+    liste_item *newItem = new liste_item(n, items);
+    items = newItem;
+    count++;
 }
-
-// a refaire plus tard add est faux
 
 int liste::size()
 {
     return count;
 }
 
-int liste::get(int index, liste_item *items)
+int liste::get(int index)
 {
-    return items[index].getValue();
+    liste_item *current = items;
+    if (index < 0 || index >= count)
+    {
+        std::cerr << "Index out of bounds" << std::endl;
+        return -1; // or throw an exception
+    }
+    else
+    {
+        for (int i = 0; i < index; i++)
+        {
+            current = current->getSuiv();
+        }
+    }
+    return current->getValue();
 }
 
 void liste::clear()
 {
-    items = nullptr;
+    for (int i = 0; i < count; i++)
+    {
+        liste_item *current = items;
+        items = items->getSuiv();
+        delete current;
+    }
     count = 0;
 }
