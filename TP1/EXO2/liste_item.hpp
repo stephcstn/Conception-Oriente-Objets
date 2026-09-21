@@ -1,17 +1,17 @@
 #ifndef LISTE_ITEM_HPP
 #define LISTE_ITEM_HPP
 
-class liste_item
+class Liste_item
 {
 private:
-    int value;
-    liste_item *suiv;
+    int valeur;
+    Liste_item *suiv;
 
 public:
-    liste_item(int n, liste_item *s);
-    int getValue();
-    liste_item *getSuiv();
-    void setValue(int n);
+    Liste_item(int n);
+    int getValeur();
+    Liste_item *getSuiv();
+    void setSuiv(Liste_item *suivant);
 };
 
 #endif

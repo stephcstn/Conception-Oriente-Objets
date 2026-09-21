@@ -1,27 +1,22 @@
 #include <iostream>
-#include "liste_item.cpp"
-#include "liste.cpp"
+#include "liste.hpp"
+#include "liste_item.hpp"
 
 int main()
 {
-    liste_item i2(2, nullptr);
-    liste_item i1(1, &i2);
-    std::cout << i1.getValue() << std::endl;
-    std::cout << i1.getSuiv()->getValue() << std::endl;
-    i2.setValue(3);
-    std::cout << i1.getSuiv()->getValue() << std::endl;
+    Liste liste1 = Liste();
+    liste1.add(4);
+    liste1.add(7);
+    liste1.add(10);
 
-    liste myList;
-    myList.add(1);
-    myList.add(2);
-    myList.add(3);
+    liste1.print();
 
-    std::cout << "Size of list: " << myList.size() << std::endl;
+    std::cout << liste1.get(2) << std::endl;
 
-    std::cout << "Value at index 0: " << myList.get(0) << std::endl;
+    std::cout << "la taille de la liste est : " << liste1.size() << std::endl;
 
-    myList.clear();
-    std::cout << "Size of list after clear: " << myList.size() << std::endl;
+    liste1.clear();
+    liste1.print();
 
     return 0;
 }

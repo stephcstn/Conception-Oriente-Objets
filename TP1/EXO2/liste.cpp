@@ -1,49 +1,88 @@
 #include <iostream>
 #include "liste.hpp"
 
-liste::liste()
+Liste::Liste()
 {
     items = nullptr;
-    count = 0;
 }
 
-void liste::add(int n)
+Liste_item *Liste::getItems()
 {
-    liste_item *newItem = new liste_item(n, items);
-    items = newItem;
-    count++;
+    return items;
 }
 
-int liste::size()
+void Liste::add(int n)
 {
+    Liste_item *newItems = new Liste_item(n);
+    if (items == nullptr)
+    {
+        items = newItems;
+        return;
+    }
+    Liste_item *current = items;
+    while (current->getSuiv() != nullptr)
+    {
+        current = current->getSuiv();
+    }
+    current->setSuiv(newItems);
+}
+
+int Liste::size()
+{
+    Liste_item *current = items;
+    int count = 0;
+    while (current != nullptr)
+    {
+        count++;
+        current = current->getSuiv();
+    }
     return count;
 }
 
-int liste::get(int index)
+void Liste::print()
 {
-    liste_item *current = items;
-    if (index < 0 || index >= count)
+    if (items == nullptr)
     {
-        std::cerr << "Index out of bounds" << std::endl;
-        return -1; // or throw an exception
+        std::cout << "liste vide" << std::endl;
+        return;
     }
-    else
+    Liste_item *current = items;
+    while (current->getSuiv() != nullptr)
     {
-        for (int i = 0; i < index; i++)
-        {
-            current = current->getSuiv();
-        }
+        std::cout << current->getValeur() << "->";
+        current = current->getSuiv();
     }
-    return current->getValue();
+    std::cout << current->getValeur() << std::endl;
 }
 
-void liste::clear()
+int Liste::get(int n)
 {
-    for (int i = 0; i < count; i++)
+    if (n < 0 || n >= this->size())
     {
-        liste_item *current = items;
-        items = items->getSuiv();
-        delete current;
+        std::cerr << "error : index hors limites" << std::endl;
+        return -1;
     }
-    count = 0;
+
+    Liste_item *current = items;
+    int count = 0;
+
+    while (count < n && current != nullptr)
+    {
+        current = current->getSuiv();
+        count++;
+    }
+
+    return current->getValeur();
+}
+
+void Liste::clear()
+{
+    Liste_item *current = items;
+    while (current != nullptr)
+    {
+        Liste_item *temp = current;
+        current = current->getSuiv();
+        delete temp;
+    }
+    items = nullptr;
 }

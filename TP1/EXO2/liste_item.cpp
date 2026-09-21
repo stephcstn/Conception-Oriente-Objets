@@ -1,23 +1,22 @@
-#include <iostream>
 #include "liste_item.hpp"
 
-liste_item::liste_item(int n, liste_item *s)
+Liste_item::Liste_item(int n)
 {
-    value = n;
-    suiv = s;
+    valeur = n;
+    suiv = nullptr;
 }
 
-int liste_item::getValue()
+int Liste_item::getValeur()
 {
-    return value;
+    return valeur;
 }
 
-void liste_item::setValue(int n)
-{
-    value = n;
-}
-
-liste_item *liste_item::getSuiv()
+Liste_item *Liste_item::getSuiv()
 {
     return suiv;
+}
+
+void Liste_item::setSuiv(Liste_item *suivant)
+{
+    suiv = suivant;
 }

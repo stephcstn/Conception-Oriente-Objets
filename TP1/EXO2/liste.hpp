@@ -2,20 +2,19 @@
 #define LISTE_HPP
 
 #include "liste_item.hpp"
-
-class liste
+class Liste
 {
-
 private:
-    liste_item *items;
-    int count;
+    Liste_item *items;
 
 public:
-    liste();
+    Liste();
+    Liste_item *getItems();
     void add(int n);
     int size();
+    void print();
+    int get(int n);
     void clear();
-    int get(int index);
 };
 
 #endif
