@@ -5,7 +5,7 @@
 
 int main()
 {
-    Logger logger("MyLogger", INFO, "This is an info message.");
+    // Logger logger("MyLogger", INFO, "This is an info message.");
     // logger.printLog();
 
     return 0;
