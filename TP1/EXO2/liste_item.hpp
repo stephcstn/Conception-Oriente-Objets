@@ -3,15 +3,10 @@
 
 class Liste_item
 {
-private:
-    int valeur;
-    Liste_item *suiv;
-
 public:
     Liste_item(int n);
-    int getValeur();
-    Liste_item *getSuiv();
-    void setSuiv(Liste_item *suivant);
+    int valeur;
+    Liste_item *suiv;
 };
 
 #endif

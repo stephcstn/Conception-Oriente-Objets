@@ -4,11 +4,7 @@
 Liste::Liste()
 {
     items = nullptr;
-}
-
-Liste_item *Liste::getItems()
-{
-    return items;
+    num_version = 0;
 }
 
 void Liste::add(int n)
@@ -20,11 +16,12 @@ void Liste::add(int n)
         return;
     }
     Liste_item *current = items;
-    while (current->getSuiv() != nullptr)
+    while (current->suiv != nullptr)
     {
-        current = current->getSuiv();
+        current = current->suiv;
     }
-    current->setSuiv(newItems);
+    current->suiv = newItems;
+    num_version++;
 }
 
 int Liste::size()
@@ -34,7 +31,7 @@ int Liste::size()
     while (current != nullptr)
     {
         count++;
-        current = current->getSuiv();
+        current = current->suiv;
     }
     return count;
 }
@@ -47,12 +44,12 @@ void Liste::print()
         return;
     }
     Liste_item *current = items;
-    while (current->getSuiv() != nullptr)
+    while (current->suiv != nullptr)
     {
-        std::cout << current->getValeur() << "->";
-        current = current->getSuiv();
+        std::cout << current->valeur << "->";
+        current = current->suiv;
     }
-    std::cout << current->getValeur() << std::endl;
+    std::cout << current->valeur << std::endl;
 }
 
 int Liste::get(int n)
@@ -68,11 +65,11 @@ int Liste::get(int n)
 
     while (count < n && current != nullptr)
     {
-        current = current->getSuiv();
+        current = current->suiv;
         count++;
     }
 
-    return current->getValeur();
+    return current->valeur;
 }
 
 void Liste::clear()
@@ -81,8 +78,9 @@ void Liste::clear()
     while (current != nullptr)
     {
         Liste_item *temp = current;
-        current = current->getSuiv();
+        current = current->suiv;
         delete temp;
     }
     items = nullptr;
+    num_version++;
 }

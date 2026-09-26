@@ -6,10 +6,12 @@ class Liste
 {
 private:
     Liste_item *items;
+    int num_version;
+
+    friend class Liste_it;
 
 public:
     Liste();
-    Liste_item *getItems();
     void add(int n);
     int size();
     void print();
