@@ -1,27 +1,22 @@
 #ifndef LOGGER_HPP
 #define LOGGER_HPP
 
-#include <string>
-#include <ctime>
-
-enum LevelLogger
-{
-    INFO,
-    WARNING,
-    ERROR
-};
-
-class Logger
+#include <filesystem>
+#include "log_item.hpp"
+#include "log.hpp"
+class logger
 {
 private:
-    std::string nameLogger;
-    LevelLogger levelLogger;
-    std::time_t timestamp;
-    std::string message;
+    std::filesystem::path filePath;
+    LevelLogger filtreLog;
+    int TailleMax = 1000;
+    log &l;
 
 public:
-    Logger(std::string name, LevelLogger level, std::string msg);
-    // void printLog();
+    logger(log &historique);
+    logger(log &historique, LevelLogger filtreLogger);
+    void makeLog(LevelLogger levelLog, std::string msg);
+    
 };
 
 #endif

@@ -1,13 +1,6 @@
 #include <iostream>
 #include "logger.hpp"
 
-Logger::Logger(std::string name, LevelLogger level, std::string msg)
-{
-    nameLogger = name;
-    levelLogger = level;
-    message = msg;
-}
-
 // void Logger::printLog()
 // {
 //     // std::time_t now = std::time(nullptr);
@@ -32,3 +25,21 @@ Logger::Logger(std::string name, LevelLogger level, std::string msg)
 
 //     std::cout << message << std::endl;
 // }
+
+logger::logger(log &historique)
+    : filtreLog(INFO), l(historique)
+{
+}
+
+logger::logger(log &historique, LevelLogger filtreLogger) : l(historique)
+{
+    filtreLog = filtreLogger;
+}
+
+void logger::makeLog(LevelLogger levelLog, std::string msg)
+{
+    if (levelLog >= filtreLog)
+    {
+        l.add(levelLog, msg); // 'l' est la référence vers historique1 initialisée dans le constructeur
+    }
+}

@@ -3,24 +3,30 @@
 
 typedef float scal;
 
-class Vecteur{
+class Vecteur
+{
     size_t n_dimensions;
     float *m_donnees;
-    public:
-    Vecteur(std::size_t taille = 1, float valInit = 0.0);
+
+public:
+    Vecteur();
+    Vecteur(size_t taille);
+    Vecteur(size_t taille, scal nombreInit);
     ~Vecteur();
-    Vecteur(const Vecteur& rhs);
-    Vecteur operator+(const Vecteur& b);
-    Vecteur operator-(const Vecteur& b);
-    double operator*(const Vecteur& b);
-    VecteurD operator*(const double scalaire);
-    VecteurD operator*(const VecteurD v);
-    Vecteur operator^(const VecteurD& b);
-    VecteurD& operator+=(const VecteurD& b);
-    VecteurD& operator-=(const VecteurD& b);
-    VecteurD& operator*=(const double scalaire);
-    VecteurD& operator^=(const VecteurD& b);
-    double& operator[](std::size_t indice);
-    const double& operator[](std::size_t index) const;
+    Vecteur(const Vecteur &rhs);
+    Vecteur &operator=(const Vecteur &rhs);
+    Vecteur operator+(const Vecteur &b);
     size_t size() const;
-}
+    // Vecteur operator-(const Vecteur &b);
+    // double operator*(const Vecteur &b);
+    // Vecteur operator*(const double scalaire);
+    // Vecteur operator*(const Vecteur v);
+    // Vecteur operator^(const Vecteur &b);
+    // Vecteur &operator+=(const Vecteur &b);
+    // Vecteur &operator-=(const Vecteur &b);
+    // Vecteur &operator*=(const double scalaire);
+    // Vecteur &operator^=(const Vecteur &b);
+    // double &operator[](std::size_t indice);
+    // const double &operator[](std::size_t index) const;
+    // size_t size() const;
+};
