@@ -10,23 +10,23 @@ class Vecteur
 
 public:
     Vecteur();
-    Vecteur(size_t taille);
-    Vecteur(size_t taille, scal nombreInit);
+    Vecteur(const size_t taille);
+    Vecteur(const size_t taille, const scal nombreInit);
     ~Vecteur();
     Vecteur(const Vecteur &rhs);
     Vecteur &operator=(const Vecteur &rhs);
-    Vecteur operator+(const Vecteur &b);
+    Vecteur operator+(const Vecteur &rhs) const;
+    Vecteur operator-(const Vecteur &rhs) const;
+    scal operator*(const Vecteur &rhs) const;
+    Vecteur operator*(const double scalaire) const;
+    Vecteur operator*(const Vecteur rhs) const;
+    Vecteur operator^(const Vecteur &rhs) const;
     size_t size() const;
-    // Vecteur operator-(const Vecteur &b);
-    // double operator*(const Vecteur &b);
-    // Vecteur operator*(const double scalaire);
-    // Vecteur operator*(const Vecteur v);
-    // Vecteur operator^(const Vecteur &b);
-    // Vecteur &operator+=(const Vecteur &b);
-    // Vecteur &operator-=(const Vecteur &b);
+
+    // Vecteur &operator+=(const Vecteur &rhs);
+    // Vecteur &operator-=(const Vecteur &rhs);
     // Vecteur &operator*=(const double scalaire);
-    // Vecteur &operator^=(const Vecteur &b);
-    // double &operator[](std::size_t indice);
-    // const double &operator[](std::size_t index) const;
-    // size_t size() const;
+    // Vecteur &operator^=(const Vecteur &rhs);
+    // double &operator[](const std::size_t indice);
+    // double &operator[](const std::size_t index) const;
 };
