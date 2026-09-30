@@ -31,5 +31,5 @@ class Matrix{
     void afficher() const;
 };
 
-std::ostream& operator<<(std::ostream& os, const Matrix& m);
+const std::ostream& operator<<(std::ostream& os, const Matrix& m);
 std::istream& operator>>(std::istream& is, Matrix& m);

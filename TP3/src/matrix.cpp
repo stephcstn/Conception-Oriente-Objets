@@ -262,7 +262,7 @@ void Matrix::afficher() const{
     std::cout << std::endl;
 }
 
-std::ostream& operator<<(std::ostream& os, const Matrix& m) {
+const std::ostream& operator<<(std::ostream& os, const Matrix& m) {
     os << m.nb_lignes() << " " << m.nb_col() << "\n";
 
     for (size_t i = 0; i < m.nb_lignes(); ++i) {
