@@ -42,6 +42,10 @@ Vecteur::Vecteur(const Vecteur &rhs)
 }
 
 bool Vecteur::operator==(const Vecteur &rhs) const{
+    if (this == &rhs) {
+        return true;
+    }
+    
     if (n_dimensions != rhs.n_dimensions){
         return false;
     }
