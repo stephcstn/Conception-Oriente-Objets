@@ -11,15 +11,17 @@ message(STATUS "PARAMETRAGE DE TP3")
 
 set(HEADERS
     "include/vecteur.hpp"
+    "include/matrix.hpp"
 )
 
 set(SOURCES # attention pas de main.c!
     "src/vecteur.cpp"
+    "src/matrix.cpp"
 )
 
 
-add_executable(vecteurexe "src/main.cpp" ${SOURCES})
-target_include_directories(vecteurexe PUBLIC "include") # pour retrouver fibo
+add_executable(appexe "src/main.cpp" ${SOURCES})
+target_include_directories(appexe PUBLIC "include") # pour retrouver fibo
 
 ## parties des tests
 
@@ -47,5 +49,10 @@ add_executable(vecteur_tests "tests/test_vecteur.cpp" ${SOURCES})
 target_include_directories(vecteur_tests PRIVATE include)
 target_link_libraries(vecteur_tests PRIVATE GTest::gtest GTest::gtest_main)
 
+add_executable(matrix_tests "tests/test_matrix.cpp" ${SOURCES})
+target_include_directories(matrix_tests PRIVATE include)
+target_link_libraries(matrix_tests PRIVATE GTest::gtest GTest::gtest_main)
+
 include(GoogleTest)
 gtest_discover_tests(vecteur_tests)
+gtest_discover_tests(matrix_tests)

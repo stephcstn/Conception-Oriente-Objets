@@ -91,5 +91,5 @@ TEST(VecteurTest, OperationsArithmetiques) {
 
     // normalisation d'un vecteur
     Vecteur v6(2,2.0);
-    EXPECT_NEAR(v6.norm(), 2.8284, 2.8285);
+    EXPECT_NEAR(v6.norm(), 2.884, 2.8285);
 }

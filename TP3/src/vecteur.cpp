@@ -124,7 +124,7 @@ scal Vecteur::operator*(const Vecteur &rhs) const
 
     for (size_t i = 0; i < n_dimensions; i++)
     {
-        res += this->m_donnees[i] * rhs.m_donnees[i];
+        res += m_donnees[i] * rhs.m_donnees[i];
     }
 
     return res;
@@ -223,12 +223,12 @@ const scal &Vecteur::operator[](const std::size_t index) const{
     return m_donnees[index];
 }
 
-size_t Vecteur::size() const
+const size_t &Vecteur::size() const
 {
     return n_dimensions;
 }
 
-scal Vecteur::norm() const{
+const scal Vecteur::norm() const{
     scal somme = 0;
     for (size_t i = 0; i < n_dimensions ; i++){
         somme += pow(m_donnees[i],2);
