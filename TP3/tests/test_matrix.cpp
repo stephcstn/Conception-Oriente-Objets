@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include "matrix.hpp"
+#include <fstream>
 
 TEST(MatrixTest, Constructeurs) {
     Matrix m_defaut;
@@ -78,4 +79,41 @@ TEST(VecteurTest, OperationsArithmetiques) {
     Matrix m7(2, 2, 5.0);
     m6 *= m7;
     EXPECT_EQ(m6, attendu_mult);
+
+    // indexation const
+    Matrix m8(2,2,5.0);
+    scal copy = m8(1,1);
+    EXPECT_EQ(copy,5.0);
+
+    // indexation
+    m8(1,1) = 3.0;
+    copy = m8(1,1);
+    EXPECT_EQ(copy,3.0);
+
+    // transposition
+    Matrix m9(2, 2, 5.0);
+    m9(0,0) = 3.0;
+    m9(0,1) = 4.0;
+    m9(1,1) = 6.0;
+
+    m9.transposition(); 
+
+    Matrix m10(2, 2, 5.0);
+    m10(0,0) = 3.0;
+    m10(0,1) = 5.0;
+    m10(1,0) = 4.0;
+    m10(1,1) = 6.0;
+
+    EXPECT_EQ(m9, m10);
+    m10.afficher();
+
+    //ecrire fichier et fermer pour pouvoir ecrire
+    {
+        std::ofstream out("matrice.txt");
+        out << m9;
+    } 
+    std::ifstream fichier("matrice.txt");
+    Matrix m11;
+    fichier >> m11;
+    std::cout << m11;
 }

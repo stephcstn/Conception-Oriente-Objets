@@ -6,6 +6,9 @@ Matrix::Matrix()
     m_mat = new scal*[2];
     for (size_t i = 0; i < 2 ; i++){
         m_mat[i] = new scal[2];
+        for (size_t j = 0 ; j < 2 ; j++){
+            m_mat[i][j] = 0;
+        }
     }
     m_lignes = 2;
     m_col = 2;
@@ -15,6 +18,9 @@ Matrix::Matrix(const size_t lignes, const size_t col){
     m_mat = new scal*[lignes];
     for (size_t i = 0 ; i < lignes ; i++){
         m_mat[i] = new scal[col];
+        for (size_t j = 0 ; j < col ; j++){
+            m_mat[i][j] = 0;
+        }
     }
     m_lignes = lignes;
     m_col = col;
@@ -218,10 +224,72 @@ Matrix &Matrix::operator*=(const Matrix &rhs){
     return *this;
 }
 
+scal& Matrix::operator()(const size_t i, const size_t j){
+    return m_mat[i][j];
+}
+
+const scal& Matrix::operator()(const size_t i, const size_t j) const{
+    return m_mat[i][j];
+}
+
+Matrix &Matrix::transposition() {
+    for (size_t i = 0; i < m_lignes; ++i) {
+        for (size_t j = i + 1; j < m_col; ++j) {
+            std::swap(m_mat[i][j], m_mat[j][i]);
+        }
+    }
+    return *this;
+}
+
 size_t Matrix::nb_lignes() const{
     return m_lignes;
 }
 
 size_t Matrix::nb_col() const{
     return m_col;
+}
+
+void Matrix::afficher() const{
+    std::cout << "Matrice (" << m_lignes << "x" << m_col << ") :" << std::endl;
+
+    for (size_t i = 0; i < m_lignes; ++i) {
+        std::cout << "  [ ";
+        for (size_t j = 0; j < m_col; ++j) {
+            std::cout << m_mat[i][j] << " ";
+        }
+        std::cout << "]" << std::endl;
+    }
+    std::cout << std::endl;
+}
+
+std::ostream& operator<<(std::ostream& os, const Matrix& m) {
+    os << m.nb_lignes() << " " << m.nb_col() << "\n";
+
+    for (size_t i = 0; i < m.nb_lignes(); ++i) {
+        for (size_t j = 0; j < m.nb_col(); ++j) {
+            os << m(i, j) << " ";
+        }
+        os << "\n";
+    }
+    return os;
+}
+
+std::istream& operator>>(std::istream& is, Matrix& m) {
+    size_t nb_lignes = 0;
+    size_t nb_cols = 0;
+
+    if (is >> nb_lignes >> nb_cols) {
+        Matrix tmp(nb_lignes, nb_cols);
+
+        for (size_t i = 0; i < nb_lignes; ++i) {
+            for (size_t j = 0; j < nb_cols; ++j) {
+                if (!(is >> tmp(i, j))) {
+                    return is;
+                }
+            }
+        }
+        m = tmp;
+    }
+
+    return is;
 }
